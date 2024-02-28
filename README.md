@@ -1,6 +1,6 @@
 **_Practica1_**
 **_Codigo Base_**
-'''
+´´´
 #include <Arduino.h>
 #define LED_BUILTIN 2
 #define DELAY 500
@@ -15,5 +15,5 @@ delay(DELAY);
 digitalWrite(LED_BUILTIN, LOW);
 delay(DELAY);
 }
-'''
+´´´
 
