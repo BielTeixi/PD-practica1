@@ -86,14 +86,13 @@ void loop() {
 - **Punto 1.5**
 
 - **Punto 1.6**
-```
    pie
       accTitle: My Pie Chart Accessibility Title
       accDescr: My Pie Chart Accessibility Description
 
     title Activitat del Microprocessador
-    "Microprocessador Actiu" : 42.96
-    "Microprocessador en Repós" : 50.05
-```
+    "Microprocessador Actiu" : 0.1
+    "Microprocessador en Repós" : 99.9
+
 
 
