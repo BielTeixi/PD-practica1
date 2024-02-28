@@ -19,7 +19,7 @@ delay(DELAY);
 //Como para un led el termino intensidad se trata en idioma binario, al aumentar la intensidad el led se encenderá i al disminuirla se apagará.
 ```
 
-- **Codigo del punto 1.1: Modificaciñon del código para imprimir ON-OFF**
+- **Codigo del punto 1.1: Modificación del código para imprimir ON-OFF**
 ```
 #include <Arduino.h>
 
@@ -43,21 +43,57 @@ Serial.println("OFF"); //Al disminuir la intensidad del led escribe en pantalla 
 delay(DELAY);
 }
 ```
+- **Punto 1.3: Modificar programa para que actue en los registros de entrada de salida.**
+```
+#include <Arduino.h>
+
+#define LED_BUILTIN 23
+#define DELAY 1000
+
+#define GPIO_OUT_REG 0x3FF4400C
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(LED_BUILTIN, OUTPUT);
+}
+
+void loop() {
+//Declaramos un puntero gpio_out que apunta a la dirección de memoria del registro GPIO de salida.
+//El tipo de puntero es volatile uint32_t para que el compilador no optimice el acceso a este registro y que debe leerlo y escribirlo cada vez que se acceda a él.
+  volatile uint32_t *gpio_out = (volatile uint32_t *)GPIO_OUT_REG;
+// Se establece en "activo" el bit correspondiente al pin del led
+  *gpio_out |= (1 << LED_BUILTIN);
+
+  digitalWrite(LED_BUILTIN, HIGH);
+  Serial.println("ON");
+  delay(DELAY);
+//Se realiza una operación XOR para alternar el estado del bit correspondiente al pin del led
+  *gpio_out ^= (1 << LED_BUILTIN);
+  digitalWrite(LED_BUILTIN, LOW);
+
+  Serial.println("OFF");
+
+  delay(DELAY);
+}
+```
+
+- **Punto 1.4**
+
+```
+
+```
 
 - **Punto 1.5**
-  Importante: los puntos 1.3 y 1.4 no son necesarios!!!
----
-title: Node with text
----
-flowchart LR
-    id(["Diagrama de Flujos"])
 
-|ON||OFF||ON|
+- **Punto 1.6**
+```
+   pie
+      accTitle: My Pie Chart Accessibility Title
+      accDescr: My Pie Chart Accessibility Description
 
-
-
-
-
+    title Activitat del Microprocessador
+    "Microprocessador Actiu" : 42.96
+    "Microprocessador en Repós" : 50.05
+```
 
 
-    
