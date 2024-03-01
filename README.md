@@ -1,5 +1,7 @@
 # **_Practica1_**
+
 ## **_Codigo Base_**
+
 Este es el codigo sobre el que se basa esta practica y sobre el que trabajaremos.
 ```
 #include <Arduino.h>
@@ -56,6 +58,7 @@ Serial.println("OFF");
 delay(DELAY);
 }
 ```
+
 ## **Punto 1.3: Modificar programa para que actue en los registros de entrada de salida.**
 ```
 #include <Arduino.h>
@@ -93,8 +96,10 @@ void loop() {
 ```
 
 ## **Punto 1.4**
+
 Vamos a medir la frecuencia con el osciloscopio, variando el pin de salida y quitando delays, cual es la màxima frecuencia de apagado encendido que permite el microcontrolador.
 ### **1.4.1: Con el envio por el puerto série del mensaje i utilizando las funciones de Arduino**
+
 EL led de salida sera el 14, y el resultado es una frecuencia de 29.81 KHz, en salida.
 ```
  #include <Arduino.h>
@@ -119,12 +124,13 @@ EL led de salida sera el 14, y el resultado es una frecuencia de 29.81 KHz, en s
 ```
 
 ### **1.4.2: Con el envio por el puerto série y accedirendo directamente a los registros**
+
 En este caso sa frecuencia medida por el osciloscopio en el pin 14 de salida es 29,77 KHz.
 ````
  #include <Arduino.h>
 
    int led = 14;
-   uint32_t *gpio_out = (uint32_t *)GPIO_OUT_REG;
+    uint32_t *gpio_out = (uint32_t *)GPIO_OUT_REG;
 
    void setup() {                
       pinMode(led, OUTPUT);   
@@ -142,10 +148,11 @@ En este caso sa frecuencia medida por el osciloscopio en el pin 14 de salida es 
 ````
 
 ### **1.4.3: Sin el envio por el puerto série del mensaje i utilizando las funciones de Arduino**
+
 La frecuencia de salida en este caso es de unos 1,72 MHz.
 ````
 #include <Arduino.h>
-int led = 14; 
+  int led = 14; 
 
 void setup() {                
    pinMode(led, OUTPUT);   
@@ -160,10 +167,11 @@ void loop() {
 ````
 ### **1.4.4: Sin el envio por el puerto série y accedirendo directamente a los registros**
 
+Por último, en este caso la frecuencia de salida da 4,701 MHz
 ````
 #include <Arduino.h>
-int led = 14; 
-uint32_t *gpio_out = (uint32_t *)GPIO_OUT_REG;
+ int led = 14; 
+ uint32_t *gpio_out = (uint32_t *)GPIO_OUT_REG;
 
 void setup() {                
    pinMode(led, OUTPUT);   
@@ -171,14 +179,24 @@ void setup() {
 
 void loop() {
 
-*gpio_out |= (1 << led);
+  *gpio_out |= (1 << led);
 
-*gpio_out ^= (1 << led);
+  *gpio_out ^= (1 << led);
 }
 ````
 
-
 ## **Punto 1.5**
+El diagrama de flujo y diagrama de tiempo
+```mermaid
+flowchart TD
+  A[Inicio] -->|Inicialización| B(Setup)
+  B -->|Establecer modo de salida| C((LED Encendido))
+  C -->|Encender LED| D([Delay 500ms])
+  D -->|Apagar LED| E(((LED Apagado)))
+  E -->|Delay 500ms| D
+  E -->|Repetir| F([FIN])
+```
+
 
 ## **Punto 1.6**
  
