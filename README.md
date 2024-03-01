@@ -1,5 +1,5 @@
-1 **_Practica1_**
-- **_Codigo Base_**
+# **_Practica1_**
+## **_Codigo Base_**
 ```
 //Este es el codigo sobre el que se basa esta practica y sobre el que trabajaremos.
 #include <Arduino.h> //incluye la biblioteca Arduino que permite trabajar con sus funciones propias.
@@ -19,7 +19,7 @@ delay(DELAY);
 //Como para un led el termino intensidad se trata en idioma binario, al aumentar la intensidad el led se encenderá i al disminuirla se apagará.
 ```
 
-- **Codigo del punto 1.1: Modificación del código para imprimir ON-OFF**
+## **Codigo del punto 1.1: Modificación del código para imprimir ON-OFF**
 ```
 #include <Arduino.h>
 
@@ -43,7 +43,7 @@ Serial.println("OFF"); //Al disminuir la intensidad del led escribe en pantalla 
 delay(DELAY);
 }
 ```
-- **Punto 1.3: Modificar programa para que actue en los registros de entrada de salida.**
+## **Punto 1.3: Modificar programa para que actue en los registros de entrada de salida.**
 ```
 #include <Arduino.h>
 
@@ -77,22 +77,52 @@ void loop() {
 }
 ```
 
-- **Punto 1.4**
-
+## **Punto 1.4**
+Vamos a medir la freqüencia con el osciloscopio, variando el pin de salida y quitando delays, cual es la màxima frecuencia de apagado encendido que permite el microcontrolador.
+###**1.4.1: Con el envio por el puerto série del mensaje i utilizando las funciones de Arduino**
 ```
+ #include <Arduino.h>
 
+   int led = 14; 
+
+   void setup() {                
+      pinMode(led, OUTPUT);   
+      Serial.begin(115200);
+   }
+
+   void loop() {
+      Serial.println("ON");
+      digitalWrite(led, HIGH);
+      Serial.println("OFF");      
+      digitalWrite(led, LOW);
+   }
 ```
+EL led de salida sera el 14, y el resultado es una freqüencia de 29.81 KHz, en salida.
+
+###**1.4.2: Con el envio por el puerto série y accedirendo directamente a los registros**
+````
+ #include <Arduino.h>
+
+   int led = 14;
+   uint32_t *gpio_out = (uint32_t *)GPIO_OUT_REG;
+
+   void setup() {                
+      pinMode(led, OUTPUT);   
+      Serial.begin(115200);
+   }
+
+   void loop() {
+      Serial.println("ON");
+      *gpio_out |= (1 << led);
+      Serial.println("OFF");      
+      *gpio_out ^= (1 << led);
+   }
+````
 
 - **Punto 1.5**
 
 - **Punto 1.6**
-   pie
-      accTitle: My Pie Chart Accessibility Title
-      accDescr: My Pie Chart Accessibility Description
-
-    title Activitat del Microprocessador
-    "Microprocessador Actiu" : 0.1
-    "Microprocessador en Repós" : 99.9
+ 
 
 
 
