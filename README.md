@@ -3,7 +3,7 @@
 ## **_Codigo Base_**
 
 Este es el codigo sobre el que se basa esta practica y sobre el que trabajaremos.
-```
+```c++
 #include <Arduino.h>
  //incluye la biblioteca Arduino que permite trabajar con sus funciones propias.
 
@@ -27,7 +27,7 @@ delay(DELAY);
 ```
 
 ## **Codigo del punto 1.1: Modificación del código para imprimir ON-OFF**
-```
+```c++
 #include <Arduino.h>
 
 #define LED_BUILTIN 23
@@ -60,7 +60,7 @@ delay(DELAY);
 ```
 
 ## **Punto 1.3: Modificar programa para que actue en los registros de entrada de salida.**
-```
+```c++
 #include <Arduino.h>
 
 #define LED_BUILTIN 23
@@ -101,7 +101,7 @@ Vamos a medir la frecuencia con el osciloscopio, variando el pin de salida y qui
 ### **1.4.1: Con el envio por el puerto série del mensaje i utilizando las funciones de Arduino**
 
 EL led de salida sera el 14, y el resultado es una frecuencia de 29.81 KHz, en salida.
-```
+```c++
  #include <Arduino.h>
 
    int led = 14; 
@@ -126,7 +126,7 @@ EL led de salida sera el 14, y el resultado es una frecuencia de 29.81 KHz, en s
 ### **1.4.2: Con el envio por el puerto série y accedirendo directamente a los registros**
 
 En este caso sa frecuencia medida por el osciloscopio en el pin 14 de salida es 29,77 KHz.
-````
+```c++
  #include <Arduino.h>
 
    int led = 14;
@@ -145,12 +145,12 @@ En este caso sa frecuencia medida por el osciloscopio en el pin 14 de salida es 
       Serial.println("OFF");      
       *gpio_out ^= (1 << led);
    }
-````
+```
 
 ### **1.4.3: Sin el envio por el puerto série del mensaje i utilizando las funciones de Arduino**
 
 La frecuencia de salida en este caso es de unos 1,72 MHz.
-````
+```c++
 #include <Arduino.h>
   int led = 14; 
 
@@ -164,11 +164,11 @@ void loop() {
 
    digitalWrite(led, LOW);
 }
-````
+```
 ### **1.4.4: Sin el envio por el puerto série y accedirendo directamente a los registros**
 
 Por último, en este caso la frecuencia de salida da 4,701 MHz
-````
+```c++
 #include <Arduino.h>
  int led = 14; 
  uint32_t *gpio_out = (uint32_t *)GPIO_OUT_REG;
@@ -183,7 +183,7 @@ void loop() {
 
   *gpio_out ^= (1 << led);
 }
-````
+```
 
 ## **Punto 1.5**
 El diagrama de flujo y diagrama de tiempo
