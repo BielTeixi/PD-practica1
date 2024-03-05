@@ -187,6 +187,7 @@ void loop() {
 
 ## **Punto 1.5**
 El diagrama de flujo y diagrama de tiempo
+### **1.5.1- Diagrama de flujo**
 ```mermaid
 flowchart TD
   A[Inicio] -->|Inicialización| B(Setup)
@@ -195,6 +196,32 @@ flowchart TD
   D -->|Apagar LED| E(((LED Apagado)))
   E -->|Delay 500ms| D
   E -->|Repetir| F([FIN])
+```
+### **1.5.2- Diagrama de tiempo**
+```mermaid
+sequenceDiagram
+    participant Arduino
+    participant LED
+    participant Serial
+
+    rect rgb(240, 240, 240)
+        Arduino->>Arduino: setup()
+    end
+
+    loop Every 2 seconds
+        rect rgb(224, 224, 224)
+            Arduino->>LED: digitalWrite(HIGH)
+            Arduino->>Serial: Serial.println("ON")
+            loop DELAY milliseconds
+                Arduino->>Arduino: delay(DELAY)
+            end
+            Arduino->>LED: digitalWrite(LOW)
+            Arduino->>Serial: Serial.println("OFF")
+            loop DELAY milliseconds
+                Arduino->>Arduino: delay(DELAY)
+            end
+        end
+    end
 ```
 
 
