@@ -226,7 +226,10 @@ sequenceDiagram
 
 
 ## **Punto 1.6**
- 
+El tiempo libre que tiene el procesador se puede definir con el siguiente calculo:
 
+**Tiempo libre del procesador = Tiempo total de un ciclo - Tiempo ocupado en ejecución del bucle**
+
+Sabiendo el tiempo total de un ciclo marcado y calculado, con Delay, y sabiendo el tiempo que el procesador está ocupado haciendo la ejecución del bucle, haciendo la resta de estas anteriores, podemos conocer el tiempo libre que tiene el procesador.
 
 
